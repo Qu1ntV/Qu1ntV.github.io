@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator_V1</title>
+    <style>
+      .achtergrond {
+        height: 400px;
+        width: 300px;
+        border: 2px solid black;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        font-size: 20px;
+        box-shadow: 5px 5px 5px grey;
+      }
+      .scherm {
+        height: 60px;
+        width: 95%;
+        margin: 10px auto;
+        font-size: 30px;
+        text-align: right;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding-right: 5px;
+        background-color: white;
+        box-shadow: 2px 2px 2px grey;
+      }
+      .knoppencontainer {
+        height: 220px;
+        width: 95%;
+        margin: 10px auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+      }
+      .knop {
+        height: 50px;
+        width: 50px;
+        border: 2px solid black;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        font-size: 25px;
+        color: black;
+        box-shadow: 2px 2px 2px grey;
+      }
+      .knop-del {
+        height: 50px;
+        width: 50px;
+        border: 2px solid black;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        font-size: 18px;
+        color: black;
+        box-shadow: 2px 2px 2px grey;
+      }
+      .operatorknop {
+        background-color: orange;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="achtergrond">
+      <input type="text" class="scherm" id="scherm" readonly />
+      <div class="knoppencontainer">
+        <button class="knop" onclick="KarakterToevoegen('(')">(</button>
+        <button class="knop" onclick="KarakterToevoegen(')')">)</button>
+        <button class="knop-del" onclick="DeleteLaatsteKarakter()">DEL</button>
+        <button class="knop" onclick="DeleteAlles()">C</button>
+        <button class="knop" onclick="KarakterToevoegen('7')">7</button>
+        <button class="knop" onclick="KarakterToevoegen('8')">8</button>
+        <button class="knop" onclick="KarakterToevoegen('9')">9</button>
+        <button class="knop operatorknop" onclick="KarakterToevoegen('/')">/</button>
+        <button class="knop" onclick="KarakterToevoegen('4')">4</button>
+        <button class="knop" onclick="KarakterToevoegen('5')">5</button>
+        <button class="knop" onclick="KarakterToevoegen('6')">6</button>
+        <button class="knop operatorknop" onclick="KarakterToevoegen('*')">*</button>
+        <button class="knop" onclick="KarakterToevoegen('1')">1</button>
+        <button class="knop" onclick="KarakterToevoegen('2')">2</button>
+        <button class="knop" onclick="KarakterToevoegen('3')">3</button>
+        <button class="knop operatorknop" onclick="KarakterToevoegen('-')">-</button>
+        <button class="knop" onclick="KarakterToevoegen('0')">0</button>
+        <button class="knop" onclick="KarakterToevoegen('.')">.</button>
+        <button class="knop operatorknop" onclick="KarakterToevoegen('+')">+</button>
+        <button class="knop" onclick="Bereken()">=</button>
+      </div>
+    </div>
+    <script>
+      let gelijkheidhaakjes = 0;
+
+      function KarakterToevoegen(karakter) {
+        let scherm = document.getElementById("scherm");
+        scherm.value += karakter;
+
+        if (karakter === "(") {
+          gelijkheidhaakjes++;
+        } else if (karakter === ")") {
+          gelijkheidhaakjes--;
+        }
+      }
+
+      function DeleteLaatsteKarakter() {
+        let scherm = document.getElementById("scherm");
+        scherm.value = scherm.value.slice(0, -1);
+      }
+
+      function DeleteAlles() {
+        let scherm = document.getElementById("scherm");
+        scherm.value = "";
+        gelijkheidhaakjes = 0;
+      }
+
+      function Bereken() {
+        let scherm = document.getElementById("scherm");
+
+        if (scherm.value.length === 0) {
+          return;
+        }
+
+        let regex = /[0-9-+*()/]/g;
+        if (
+          scherm.value.replace(regex, "").length > 0 ||
+          gelijkheidhaakjes !== 0
+        ) {
+          scherm.value = "SYNTAX ERROR";
+        } else {
+          scherm.value = eval(scherm.value);
+        }
+
+        gelijkheidhaakjes = 0;
+      }
+
+      document.getElementById("DEL").onclick = function () {
+        DeleteLaatsteKarakter();
+      };
+      document.getElementById("C").onclick = function () {
+        DeleteAlles();
+      };
+
+      let karakters = document.getElementsByClassName("karakter");
+      for (let i = 0; i < karakters.length; i++) {
+        karakters[i].onclick = function () {
+          KarakterToevoegen(karakters[i].innerHTML);
+        };
+      }
+
+      document.getElementById("=").onclick = function () {
+        Bereken();
+      };
+    </script>
+
+    <button style="margin-right: 10px; margin-bottom: 10px; position: fixed; bottom: 0; right: 0; background-color: #fff; border: 1px solid #000; padding: 10px 20px; font-size: 16px;" onclick="history.back()">Terug</button>
+
+  </body>
+</html>

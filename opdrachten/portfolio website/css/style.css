@@ -1,0 +1,139 @@
+/**
+This CSS naming convension is using the BEM method. For more information please look at:
+https://getbem.com/
+**/
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden; /* Hide scrollbars */
+}
+
+img {
+  border-radius: 50%;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+
+/**
+ Navbar section
+**/
+
+.navbar {
+  width: 100%;
+  background-color: #1D1D1D;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+}
+
+.navbar__item {
+  padding: 10px 16px;
+}
+
+/* Reset UL element */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar ul li {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+}
+
+
+
+.navbar ul li a {
+  color: white;
+}
+
+.navbar ul li:hover {
+  background-color: #464646;
+  transition-duration: 500ms;
+}
+
+.navbar__icon {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0px;
+  transition-duration: 800ms;
+}
+
+.navbar__icon:hover {
+  transform: rotate(360deg);
+}
+
+
+
+/**
+  homepage Section
+**/
+
+.homepage p {
+  font-size: 17px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homepage h1 {
+  font-size: 45px;
+}
+
+
+/**
+  About Section
+**/
+.about {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about__image {
+  height: 150px;
+  object-fit: contain;
+  width: 150px;
+}
+
+.about h2 {
+  /* ToDo: Sytling */
+}
+
+.about p {
+  /* ToDo: Sytling */
+}
